@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Menu = () => {
+const Menu = ({menu}) => {
+  console.log("Inside menu container");
   return (
     <div>Menu</div>
   )
