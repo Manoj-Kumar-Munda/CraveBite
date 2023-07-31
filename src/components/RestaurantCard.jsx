@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const RestaurantCard = ({data}) => {
     
-    const {id,name, cloudinaryImageId,costForTwo,cuisines,deliveryTime,avgRating} = data;
+    const {id,name, cloudinaryImageId,costForTwo,cuisines,sla:{deliveryTime},avgRating} = data;
 
     let cuisine = cuisines.join(', ');
     const isRatingGreater = (avgRating > 4)?(true):(false);

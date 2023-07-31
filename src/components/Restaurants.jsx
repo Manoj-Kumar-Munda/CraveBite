@@ -185,7 +185,7 @@ const Restaurants = () => {
                 : filteredList.map((item, index) => (
                     <RestaurantCard
                       key={item?.info?.id}
-                      data={{ ...item?.info, ...item?.info?.sla }}
+                      data={item?.info}
                     />
                   ))}
             </div>
