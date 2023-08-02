@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const RestaurantInfo = ({ info }) => {
   console.log("Inside resInfo container");
+ 
 
   const {
     locality,
@@ -12,17 +13,10 @@ const RestaurantInfo = ({ info }) => {
     avgRating,
     areaName,
     totalRatings,
+    cuisines,
     sla: { deliveryTime },
   } = info;
-  console.log(
-    locality,
-    name,
-    costForTwoMessage,
-    avgRating,
-    areaName,
-    totalRatings,
-    deliveryTime
-  );
+
   return (
     <div className="space-y-5">
       <div className="flex justify-between">
@@ -31,7 +25,7 @@ const RestaurantInfo = ({ info }) => {
             <h1 className="font-bold">{name}</h1>
           </div>
           <div>
-            <p className="text-xs">Indian</p>
+            <p className="text-xs">{cuisines.join(", ")}</p>
             <p className="text-xs">{locality}</p>
           </div>
         </div>
