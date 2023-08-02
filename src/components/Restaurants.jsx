@@ -4,7 +4,6 @@ import { useAsyncError, useSearchParams } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import Hero from "./Hero";
 import Shimmer from "./Shimmer";
 import NotFound from "../assets/notFound.png";
 
@@ -82,7 +81,7 @@ const Restaurants = () => {
       const desktopData =
         json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
-      console.log(desktopData);
+      console.log(json);
       if (!desktopData) {
         setError({
           type: "fetch",
@@ -164,12 +163,11 @@ const Restaurants = () => {
                   <option value="costForTwo">Cost For Two</option>
                 </select>
               </li>
-             
             </ul>
           </div>
         </div>
 
-        <div id="restaurant" className="flex justify-center w-full mt-4">
+        <div id="restaurants" className="flex justify-center w-full mt-4">
           {error ? (
             <div className="flex flex-col justify-center bg-red space-y-4">
               <img src={NotFound} className="w-56" />
@@ -183,10 +181,7 @@ const Restaurants = () => {
                     <Shimmer key={i} />
                   ))
                 : filteredList.map((item, index) => (
-                    <RestaurantCard
-                      key={item?.info?.id}
-                      data={item?.info}
-                    />
+                    <RestaurantCard key={item?.info?.id} data={item?.info} />
                   ))}
             </div>
           )}

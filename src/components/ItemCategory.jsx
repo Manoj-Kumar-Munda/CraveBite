@@ -3,7 +3,7 @@ import MenuCategory from './MenuCategory';
 
 const ItemCategory = ({data}) => {
   console.log("Inside ItemCategory component");
-  console.log(data);
+  // console.log(data);
   return (
     <>
   

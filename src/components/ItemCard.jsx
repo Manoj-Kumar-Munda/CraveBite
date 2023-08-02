@@ -51,7 +51,7 @@ const ItemCard = ({ item }) => {
               alt={name}
               className="w-full h-full object-cover object-center rounded-lg"
             />
-            <div className="absolute -bottom-2 w-24 text-center bg-white text-green-600  py-2 text-xs font-bold border border-slate-300 rounded-sm ">
+            <div className="absolute -bottom-2 w-24 text-center bg-white text-green-600 px-2  py-2 text-xs font-bold border border-slate-300 rounded-lg">
               {orderQuantity === 0 ? (
                 <button className="w-full" onClick={() => addItem()}>
                   ADD
@@ -72,27 +72,26 @@ const ItemCard = ({ item }) => {
             </div>
           </div>
         ) : (
-          <div className="self-center w-24 text-center bg-white text-green-600 py-2 text-xs font-bold border border-slate-300 rounded-sm ">
-              {orderQuantity === 0 ? (
-                <button className="w-full" onClick={() => addItem()}>
-                  ADD
-                </button>
-              ) : (
-                <button className="w-full">
-                  <div className="flex justify-between">
-                    <span className="" onClick={() => addQuantity()}>
-                      <FontAwesomeIcon icon={faPlus} />
-                    </span>
-                    <span>{orderQuantity}</span>
-                    <span onClick={() => removeQuantity()}>
-                      <FontAwesomeIcon icon={faMinus} />
-                    </span>
-                  </div>
-                </button>
-              )}
-            </div>
-        )
-        }
+          <div className="self-center w-24 text-center bg-white text-green-600 px-2 py-2 text-xs font-bold border border-slate-300 rounded-lg">
+            {orderQuantity === 0 ? (
+              <button className="w-full" onClick={() => addItem()}>
+                ADD
+              </button>
+            ) : (
+              <button className="w-full">
+                <div className="flex justify-between">
+                  <span className="" onClick={() => addQuantity()}>
+                    <FontAwesomeIcon icon={faPlus} />
+                  </span>
+                  <span>{orderQuantity}</span>
+                  <span onClick={() => removeQuantity()}>
+                    <FontAwesomeIcon icon={faMinus} />
+                  </span>
+                </div>
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

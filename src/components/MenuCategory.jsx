@@ -9,19 +9,20 @@ const MenuCategory = ({ menu }) => {
 
   const { title, itemCards, categories } = menu;
   console.log("inside menu category component");
-  console.log(itemCards);
-  console.log(categories);
+  // console.log(itemCards);
+  // console.log(categories);
 
   return (
     <div>
       <div
+        id={title}
         className={
-          `flex justify-between my-4 py-2 cursor-pointer ` +
-          (itemCards && "border-b")
+          `flex justify-between my-4 py-2` +
+          (itemCards && "border-b cursor-pointer")
         }
         onClick={() => setIsCategoryOpen(!isCategoryOpen)}
       >
-        <span className="text-lg font-bold">{title}</span>
+        <span className="text-lg font-bold">{(itemCards)?(title+`(${itemCards.length})`):(title) }</span>
         {itemCards && (
           <div>
             {isCategoryOpen ? (

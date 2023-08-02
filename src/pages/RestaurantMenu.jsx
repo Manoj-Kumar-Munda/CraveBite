@@ -12,6 +12,7 @@ const RestaurantMenu = () => {
 
   useEffect(() => {
     getRestaurantMenu();
+    () => window.scrollTop(0);
   }, []);
 
   const getRestaurantMenu = async () => {
@@ -20,22 +21,22 @@ const RestaurantMenu = () => {
     );
     const json = await data.json();
     const resInfo = json?.data?.cards[0]?.card?.card?.info;
-    const resMenu = json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
+    const resMenu =
+      json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
     setResInfo(resInfo);
     setResMenu(resMenu);
   };
 
-  
-
   return (
     <div>
-      <div className="max-w-4xl mx-auto my-5">
+      <div className="relative max-w-4xl mx-auto my-5">
         {resMenu.length === 0 ? (
           <h1>Loading....</h1>
         ) : (
           <>
             <RestaurantInfo info={resInfo} />
             <Menu menu={resMenu} />
+            
           </>
         )}
       </div>

@@ -2,6 +2,12 @@ import React from 'react'
 import Background from "../assets/take-away-animate.svg";
 
 const Hero = () => {
+  console.log("Inside Hero component");
+  const goToRestaurants = () => {
+    const element = document.getElementById('restaurants');
+    console.log(element);
+    element.scrollIntoView();
+  }
   return (
     <section className="bg-gradient-to-b lg:bg-gradient-to-r from-[#D4145A] to-[#FBB03B] rounded-b-xl lg:h-auto h-screen lg:block flex justify-center items-center">
         
@@ -18,8 +24,10 @@ const Hero = () => {
               </p>
 
               <div>
-                <button className="transition-colors hover:text-[#D4145A] bg-gradient-to-r from-[#EDE574] to-[#E1F5C4] px-3 py-3 text-sm font-semibold text-slate-900 rounded-xl">
-                  <a href='#restaurant'>Explore Restaurants</a>
+                <button className="transition-colors hover:text-[#D4145A] bg-gradient-to-r from-[#EDE574] to-[#E1F5C4] px-3 py-3 text-sm font-semibold text-slate-900 rounded-xl"
+                onClick={() => goToRestaurants()}
+                >
+                  <span>Explore Restaurants</span>
                 </button>
               </div>
             </div>
