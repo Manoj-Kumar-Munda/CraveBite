@@ -5,9 +5,7 @@ import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const ItemCard = ({ item }) => {
   const [orderQuantity, setOrderQuantity] = useState(0);
-  // console.log("Item component");
-  // console.log(item);
-
+  
   const {
     name,
     price,
@@ -40,7 +38,7 @@ const ItemCard = ({ item }) => {
             </span>
           </div>
           <div>
-            <span className=" text-slate-500 text-xs">{description}</span>
+            <span className=" text-slate-500 text-xs line-clamp-2">{description}</span>
             {/* <span >Serves 1 | Cottage cheese marinated in Indian pickle spice, cooked in Tandoori. The soft and juicy Cottage Cheese coated with spicy and tangy masala is a delight to eat.</span> */}
           </div>
         </div>
@@ -72,7 +70,7 @@ const ItemCard = ({ item }) => {
             </div>
           </div>
         ) : (
-          <div className="self-center w-24 text-center bg-white text-green-600 px-2 py-2 text-xs font-bold border border-slate-300 rounded-lg">
+          <div className="self-center shrink-0 w-24 text-center bg-white text-green-600 px-2 py-2 text-xs font-bold border border-slate-300 rounded-lg">
             {orderQuantity === 0 ? (
               <button className="w-full" onClick={() => addItem()}>
                 ADD

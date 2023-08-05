@@ -1,21 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ItemCard from "./ItemCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import ItemCategory from "./ItemCategory";
+import { useJoin } from "../utils/useJoin";
 
 const MenuCategory = ({ menu }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(true);
+  const [vegItems, setVegItems] = useState([]);
 
   const { title, itemCards, categories } = menu;
-  console.log("inside menu category component");
-  // console.log(itemCards);
-  // console.log(categories);
 
+  // useEffect(() => {
+  //   filterVeg();
+  // }, [])
+
+  // const filterVeg = () => {
+  //   console.log("inside filter veg");
+  //   // const result = itemCards.filter((item) => item?.card?.info?.itemAttribute?.vegClassifier === "VEG")
+  //   // console.log(result);
+  //   if(itemCards){
+  //     const result = itemCards.filter( (item) => item?.card?.info?.isVeg)
+  //     console.log(result);
+  //     setVegItems(result);
+  //   }
+  
+
+  // }
+  
   return (
     <div>
       <div
-        id={title}
+        id={useJoin(title)}
         className={
           `flex justify-between my-4 py-2` +
           (itemCards && "border-b cursor-pointer")
@@ -41,9 +57,7 @@ const MenuCategory = ({ menu }) => {
             ))
           ) : categories ? (
             categories.map((item,index) => <MenuCategory menu={item} key={index} />)
-            
-            
-            
+          
           ) : null}
         </div>
       ) : null}

@@ -30,3 +30,30 @@ html::-webkit-scrollbar-thumb{
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
+
+.skeleton::after {
+    content: "";
+    position: absolute;
+    background-image: linear-gradient(
+      to right,
+      #f6f7f8 0%,
+      #edeef1 20%,
+      #f6f7f8 40%,
+      #f6f7f8 100%
+    );
+  
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    animation-name: shimmer;
+    animation-duration: 1.2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }

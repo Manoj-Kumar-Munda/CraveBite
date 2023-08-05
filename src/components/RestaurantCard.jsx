@@ -3,6 +3,7 @@ import { RESTAURANT_IMG_CDN } from '../utils/constants';
 import { Link } from 'react-router-dom';
 
 const RestaurantCard = ({data}) => {
+  //  console.log("RestaurantCard component");
     
     const {id,name, cloudinaryImageId,costForTwo,cuisines,sla:{deliveryTime},avgRating} = data;
 

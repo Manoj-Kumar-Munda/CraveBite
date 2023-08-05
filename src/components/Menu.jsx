@@ -2,9 +2,10 @@ import React from "react";
 import MenuCategory from "./MenuCategory";
 
 const Menu = ({ menu }) => {
-  console.log("Inside menu container");
+  console.log("Inside menu component");
+  
   const itemsList = menu.slice(1, -2);
-  // console.log(itemsList);
+  
 
   return (
     <div className="relative">
@@ -18,4 +19,4 @@ const Menu = ({ menu }) => {
   );
 };
 
-export default Menu;
+export default React.memo(Menu);

@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { RESTAURANT_LIST_DESKTOP } from "../utils/constants";
-import { useAsyncError, useSearchParams } from "react-router-dom";
 import RestaurantCard from "./RestaurantCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +7,7 @@ import Shimmer from "./Shimmer";
 import NotFound from "../assets/notFound.png";
 
 const Restaurants = () => {
+  console.log("Restaurants component");
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -54,6 +54,7 @@ const Restaurants = () => {
   useEffect(() => sortRes(), [sortBy]);
 
   const sortRes = () => {
+    console.log("sortRes method called");
     switch (sortBy) {
       case "deliveryTime":
         console.log("sort by delivery");
@@ -74,6 +75,7 @@ const Restaurants = () => {
 
   async function getResList() {
     try {
+      console.log("getResList fn called");
       const list = await fetch(
         "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
       );
@@ -81,7 +83,7 @@ const Restaurants = () => {
       const desktopData =
         json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
-      console.log(json);
+      // console.log(json);
       if (!desktopData) {
         setError({
           type: "fetch",
@@ -93,14 +95,24 @@ const Restaurants = () => {
       setRestaurantList(desktopData);
       setFilteredList(desktopData);
     } catch (e) {
-      throw new Error(e);
+      setError({
+        type: "fetch",
+        message: "Failed to fetch restaurant data",
+      });
     }
   }
 
-  function searchResult() {
+  const handleSearch = (e) => {
+    const searchQuery = e.target.value;
+    setSearchText(searchQuery);
+    console.log(searchQuery);
+    searchResult(searchQuery);
+  };
+
+  function searchResult(query) {
     try {
       const res = restaurantList.filter((item) =>
-        item?.info?.name.toLowerCase().includes(searchText.toLowerCase())
+        item?.info?.name.toLowerCase().includes(query.toLowerCase())
       );
       res.length === 0
         ? setError({
@@ -121,19 +133,19 @@ const Restaurants = () => {
 
   return (
     <>
-      <div className="mx-auto  lg:p-8 overflow-hidden">
+      <div className="mx-auto my-6 lg:my-8 overflow-hidden max-w-7xl">
         <div className="mx-auto flex justify-between items-center py-2 px-2 border-b">
           <div className="flex bg-white rounded-3xl px-4 py-2 space-x-2 border focus-within:border-[#E75E4C]">
             <div className="">
               <input
-                className="w-56 bg-white text-slate-600  caret-[#E75E4C] border-none outline-none placeholder:text-text-slate-600 placeholder:text-sm"
+                className=" bg-white text-slate-600  caret-[#E75E4C] border-none outline-none placeholder:text-text-slate-600 placeholder:text-sm"
                 placeholder="Search restaurant"
                 value={searchText}
-                onBlur={() => searchResult()}
-                onChange={(e) => {
-                  setSearchText(e.target.value);
-                  searchResult();
-                }}
+                onChange={
+                  (e) => handleSearch(e)
+                  // setSearchText( prev => e.target.value);
+                  // searchResult();
+                }
               />
             </div>
             <div>
@@ -173,6 +185,7 @@ const Restaurants = () => {
               <img src={NotFound} className="w-56" />
               <p className="text-center">{error.message}</p>
               <button onClick={() => location.reload()}>Refresh</button>
+          
             </div>
           ) : (
             <div className="max-w-full mx-auto grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-y-12 lg:gap-x-8 md:gap-x-12">

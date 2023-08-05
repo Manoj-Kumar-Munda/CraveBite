@@ -1,10 +1,11 @@
-import React from "react";
-import { faClock, faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import { faClock, faIndianRupeeSign, faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import veg  from "../assets/veg.png";
 
 const RestaurantInfo = ({ info }) => {
   console.log("Inside resInfo container");
- 
+  const [isVeg, setIsVeg] = useState(false);
 
   const {
     locality,
@@ -12,8 +13,9 @@ const RestaurantInfo = ({ info }) => {
     costForTwoMessage,
     avgRating,
     areaName,
-    totalRatings,
+    totalRatingsString,
     cuisines,
+    veg,
     sla: { deliveryTime },
   } = info;
 
@@ -40,7 +42,7 @@ const RestaurantInfo = ({ info }) => {
           <span className=" border-b border-slate-300"></span>
           <div>
             <span className="text-xs font-semibold text-slate-400">
-              1K+ ratings
+              {totalRatingsString}
             </span>
           </div>
         </div>
@@ -63,8 +65,24 @@ const RestaurantInfo = ({ info }) => {
           </div>
         </div>
       </div>
+
+      { (veg) ? (
+        <div className="space-x-2">
+          <FontAwesomeIcon icon={faLeaf} style={{color: "#33c14b",}} />
+          <span className="text-xs font-bold text-slate-500">PURE VEG</span>
+        </div>
+      ) : (
+        <div className="space-x-2 flex items-center">
+          <span className="text-xs font-bold text-slate-500">VEG ONLY</span>
+          <button className={`w-10 h-6 rounded-2xl relative flex items-center transition-all ${(isVeg)?(`bg-green-500`):(`bg-slate-200`)} `} onClick={() => setIsVeg(!isVeg)}>
+            <span className={`block absolute w-4 h-4 transition-all rounded-full ${(isVeg)?(`left-[calc(100%-20px)] bg-white`):(`left-1 bg-green-500`)}  `}></span>
+          </button>
+
+
+        </div>
+      )}
     </div>
   );
 };
 
-export default RestaurantInfo;
+export default React.memo(RestaurantInfo);
