@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import ItemCard from "./ItemCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import ItemCategory from "./ItemCategory";
 import { useJoin } from "../utils/useJoin";
 
 const MenuCategory = ({ menu }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(true);
-  const [vegItems, setVegItems] = useState([]);
+  // const [vegItems, setVegItems] = useState([]);
 
   const { title, itemCards, categories } = menu;
+ 
+  console.log("Inside MenuCategory");
+  console.log(menu);
 
   // useEffect(() => {
   //   filterVeg();

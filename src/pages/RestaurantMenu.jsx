@@ -1,34 +1,24 @@
 import React, { useEffect, useState } from "react";
 import RestaurantInfo from "../components/RestaurantInfo";
 import Menu from "../components/Menu";
-import { MENU_API } from "../utils/constants";
 import { useParams } from "react-router-dom";
 import { useJoin } from "../utils/useJoin";
+import useRestaurantMenu from "../utils/useRestarurantMenu";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
   console.log("RestaurantMenu");
 
-  const [resMenu, setResMenu] = useState([]);
-  const [resInfo, setResInfo] = useState({});
+  const [ resInfo, resMenu] = useRestaurantMenu(id)
   const [showBrowseMenu, setShowBrowseMenu] = useState(false);
 
-  useEffect(() => {
-    getRestaurantMenu();
-  }, []);
+  console.log(resMenu);
 
-  const getRestaurantMenu = async () => {
-    console.log("getRestaurantMenu called");
-    const data = await fetch(
-      "https://corsproxy.io/?"+MENU_API + id + "&catalog_qa=undefined&submitAction=ENTER"
-    );
-    const json = await data.json();
-    const resInfo = json?.data?.cards[0]?.card?.card?.info;
-    const resMenu =
-      json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
-    setResInfo(resInfo);
-    setResMenu(resMenu);
-  };
+  useEffect( () => {
+    window.scrollTo(top)
+  } ,[])
+
+  
 
   const handleBrowseMenu = () => {
     const body = document.querySelector("body");
@@ -42,8 +32,7 @@ const RestaurantMenu = () => {
     console.log(e.target.dataset.category);
     const element = document.querySelector(`#${e.target.dataset.category}`);
     element.scrollIntoView();
-    setShowBrowseMenu(false);
-    
+    setShowBrowseMenu(false); 
   };
 
   return (
@@ -65,7 +54,7 @@ const RestaurantMenu = () => {
                   id="browse-menu"
                   className="absolute bottom-6 h-full max-h-80 bg-white w-full max-w-md rounded-xl shadow-lg overflow-y-auto p-2 scrollbar-thin scrollbar-track-[#F5F5F5] scrollbar-thumb-[#FBB03B]"
                 >
-                  {resMenu.slice(1, -2).map((item, index) => (
+                  {resMenu.map((item, index) => (
                     <div key={index} className="px-2 mx-auto">
                       <span className="cursor-pointer text-sm font-semibold" onClick={(e) => jumpToMenu(e)} data-category={useJoin(item?.card?.card?.title)}>
                         {item?.card?.card?.title}

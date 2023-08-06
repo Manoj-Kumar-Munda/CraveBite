@@ -5,7 +5,7 @@ import Main from './layouts/Main'
 import Index from './pages/Index'
 import Error from './pages/Error'
 import RestaurantMenu from './pages/RestaurantMenu'
-import HookTest from './components/HookTest'
+
 
 
 const router = createBrowserRouter([
@@ -24,10 +24,7 @@ const router = createBrowserRouter([
         element : <RestaurantMenu />
       
       },
-      {
-        path : "/test",
-        element : <HookTest />
-      }
+      
     ]
     
   }

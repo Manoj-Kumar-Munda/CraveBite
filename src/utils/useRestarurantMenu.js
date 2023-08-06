@@ -4,8 +4,8 @@ import { MENU_API } from "./constants";
 // custom hook to fetch restaurantMenu and restaurantInfo and return it
 const useRestaurantMenu = (resId) => {
 
-    const [resInfo, setResInfo] = useState(null);
-    const [resMenu, setResMenu] = useState(null)
+    const [resInfo, setResInfo] = useState([]);
+    const [resMenu, setResMenu] = useState([])
 
     useEffect( () => {
         fetchData();
