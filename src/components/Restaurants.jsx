@@ -126,10 +126,7 @@ const Restaurants = () => {
     }
   }
 
-  const sort = (e) => {
-    console.log(e.target.value);
-    setSortBy(e.target.value);
-  };
+ 
 
   return (
     <>
@@ -143,8 +140,6 @@ const Restaurants = () => {
                 value={searchText}
                 onChange={
                   (e) => handleSearch(e)
-                  // setSearchText( prev => e.target.value);
-                  // searchResult();
                 }
               />
             </div>
@@ -166,7 +161,7 @@ const Restaurants = () => {
               <li className="">
                 <select
                   value={sortBy}
-                  onChange={(e) => sort(e)}
+                  onChange={(e) => setSortBy(e.target.value)}
                   className="px-2 py-2 rounded-lg border-2 border-red-400 focus:outline-none focus:border-red-200"
                 >
                   <option value="relevance">Relevance</option>
@@ -184,7 +179,7 @@ const Restaurants = () => {
             <div className="flex flex-col justify-center bg-red space-y-4">
               <img src={NotFound} className="w-56" />
               <p className="text-center">{error.message}</p>
-              <button onClick={() => location.reload()}>Refresh</button>
+              <button className="ring-2 ring-blue-500" onClick={() => location.reload()}>Refresh</button>
           
             </div>
           ) : (
@@ -193,7 +188,7 @@ const Restaurants = () => {
                 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
                     <Shimmer key={i} />
                   ))
-                : filteredList.map((item, index) => (
+                : filteredList.map((item) => (
                     <RestaurantCard key={item?.info?.id} data={item?.info} />
                   ))}
             </div>
