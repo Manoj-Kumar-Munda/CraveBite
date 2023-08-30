@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, addQuantity, removeQuantity } from "../utils/cartSlice";
+import { useParams } from "react-router-dom";
 
 const ItemCard = ({ item }) => {
+
+  const {id} = useParams();
   const dispatch = useDispatch();
 
   const items = useSelector((store) => store.cart.items);
@@ -24,7 +27,7 @@ const ItemCard = ({ item }) => {
   } = item;
 
   const handleAdd = () => {
-    dispatch(addItem({ ...item, quantity: 1 }));
+    dispatch(addItem({ ...item, quantity: 1,resId:id }));
   };
 
   const increaseQuantity = () => {

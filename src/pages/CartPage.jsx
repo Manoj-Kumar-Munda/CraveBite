@@ -75,7 +75,7 @@ const CartPage = () => {
                     <td className="px-3">
                       <span className="text-sm">Total</span>
                     </td>
-                    <td></td>
+                    <td> </td>
                     <td>
                       <span className="text-sm font-bold">₹ {totalAmount / 100}</span>
                     </td>
