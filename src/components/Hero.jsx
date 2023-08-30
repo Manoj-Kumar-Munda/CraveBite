@@ -5,15 +5,14 @@ const Hero = () => {
   console.log("Inside Hero component");
   const goToRestaurants = () => {
     const element = document.getElementById('restaurants');
-    console.log(element);
     element.scrollIntoView();
   }
   return (
-    <section className="bg-gradient-to-b lg:bg-gradient-to-r from-[#D4145A] to-[#FBB03B] rounded-b-xl lg:h-auto h-screen lg:block flex justify-center items-center">
+    <section className="  bg-gradient-to-r from-[#D4145A] to-[#FBB03B] flex justify-center items-center">
         
-        <div className=" lg:block px-4 mx-auto sm:px-6 lg:px-8 xl:px-12">
-          <div className="max-w-7xl lg:p-12 mx-auto flex flex-col justify-center items-center lg:flex-row lg:justify-around lg:items-center">
-            <div className="text-center lg:text-start lg:max-w-md space-y-4">
+        <div className="px-4 mx-auto lg:px-8 xl:px-12 sm:w-4/5">
+          <div className="py-8 mx-auto flex flex-col justify-start items-start lg:flex-row lg:justify-between lg:items-center">
+            <div className="text-start sm:max-w-md space-y-4">
               <h1 className="text-5xl lg:text-6xl font-bold text-white">
                 Food delivery in Ranchi
               </h1>
@@ -32,7 +31,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <div>
+            <div className='hidden lg:block'>
               <img src={Background} className="w-full h-full" />
             </div>
           </div>

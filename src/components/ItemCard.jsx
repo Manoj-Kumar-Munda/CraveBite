@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import { RESTAURANT_IMG_CDN } from "../utils/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, addQuantity, removeQuantity } from "../utils/cartSlice";
+import { useParams } from "react-router-dom";
 
 const ItemCard = ({ item }) => {
-  const [orderQuantity, setOrderQuantity] = useState(0);
+  const dispatch = useDispatch();
+
+  const items = useSelector((store) => store.cart.items);
+
+  const foodItem = items.find((element) => element.id === item.id);
   
+
   const {
     name,
     price,
@@ -16,15 +24,16 @@ const ItemCard = ({ item }) => {
     defaultPrice,
   } = item;
 
-  const addItem = () => {
-    setOrderQuantity(1);
-  };
-  const addQuantity = () => {
-    setOrderQuantity(orderQuantity + 1);
+  const handleAdd = () => {
+    dispatch(addItem({ ...item, quantity: 1 }));
   };
 
-  const removeQuantity = () => {
-    setOrderQuantity(orderQuantity - 1);
+  const increaseQuantity = () => {
+    dispatch(addQuantity(item));
+  };
+
+  const reduceQuantity = () => {
+    dispatch(removeQuantity(item));
   };
 
   return (
@@ -38,30 +47,33 @@ const ItemCard = ({ item }) => {
             </span>
           </div>
           <div>
-            <span className=" text-slate-500 text-xs line-clamp-2">{description}</span>
+            <span className=" text-slate-500 text-xs line-clamp-2">
+              {description}
+            </span>
             {/* <span >Serves 1 | Cottage cheese marinated in Indian pickle spice, cooked in Tandoori. The soft and juicy Cottage Cheese coated with spicy and tangy masala is a delight to eat.</span> */}
           </div>
         </div>
         {showImage ? (
           <div className="w-28  max-h-24 shrink-0 relative flex justify-center">
             <img
+              loading="lazy"
               src={RESTAURANT_IMG_CDN + imageId}
               alt={name}
               className="w-full h-full object-cover object-center rounded-lg"
             />
             <div className="absolute -bottom-2 w-24 text-center bg-white text-green-600 px-2  py-2 text-xs font-bold border border-slate-300 rounded-lg">
-              {orderQuantity === 0 ? (
-                <button className="w-full" onClick={() => addItem()}>
+              {!foodItem ? (
+                <button className="w-full" onClick={() => handleAdd(item)}>
                   ADD
                 </button>
               ) : (
                 <button className="w-full">
                   <div className="flex justify-between">
-                    <span className="" onClick={() => addQuantity()}>
+                    <span className="" onClick={() => increaseQuantity()}>
                       <FontAwesomeIcon icon={faPlus} />
                     </span>
-                    <span>{orderQuantity}</span>
-                    <span onClick={() => removeQuantity()}>
+                    <span>{foodItem?.quantity}</span>
+                    <span onClick={() => reduceQuantity()}>
                       <FontAwesomeIcon icon={faMinus} />
                     </span>
                   </div>
@@ -71,18 +83,18 @@ const ItemCard = ({ item }) => {
           </div>
         ) : (
           <div className="self-center shrink-0 w-24 text-center bg-white text-green-600 px-2 py-2 text-xs font-bold border border-slate-300 rounded-lg">
-            {orderQuantity === 0 ? (
-              <button className="w-full" onClick={() => addItem()}>
+            {!foodItem ? (
+              <button className="w-full" onClick={() => handleAdd(item)}>
                 ADD
               </button>
             ) : (
               <button className="w-full">
                 <div className="flex justify-between">
-                  <span className="" onClick={() => addQuantity()}>
+                  <span className="" onClick={() => increaseQuantity()}>
                     <FontAwesomeIcon icon={faPlus} />
                   </span>
-                  <span>{orderQuantity}</span>
-                  <span onClick={() => removeQuantity()}>
+                  <span>{foodItem.quantity}</span>
+                  <span onClick={() => reduceQuantity()}>
                     <FontAwesomeIcon icon={faMinus} />
                   </span>
                 </div>

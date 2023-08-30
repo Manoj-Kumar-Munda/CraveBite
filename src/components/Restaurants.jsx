@@ -7,7 +7,7 @@ import Shimmer from "./Shimmer";
 import NotFound from "../assets/notFound.png";
 
 const Restaurants = () => {
-  console.log("Restaurants component");
+  
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -15,7 +15,7 @@ const Restaurants = () => {
   const [sortBy, setSortBy] = useState("");
 
   const sortByDeliveryTime = () => {
-    console.log("sortingBy delivery time");
+    
     const data = [...restaurantList];
     const result = data.sort(
       (item1, item2) =>
@@ -39,7 +39,7 @@ const Restaurants = () => {
         parseInt(item1?.info?.costForTwo.match(/\d+/)[0], 10) -
         parseInt(item2?.info?.costForTwo.match(/\d+/)[0], 10)
     );
-    console.log(result);
+   
     setFilteredList(result);
   };
 
@@ -54,18 +54,18 @@ const Restaurants = () => {
   useEffect(() => sortRes(), [sortBy]);
 
   const sortRes = () => {
-    console.log("sortRes method called");
+    
     switch (sortBy) {
       case "deliveryTime":
-        console.log("sort by delivery");
+        
         sortByDeliveryTime();
         break;
       case "rating":
-        console.log("sortByRating");
+        
         sortByRating();
         break;
       case "costForTwo":
-        console.log("sortByCost...");
+        
         sortByCost();
         break;
       default:
@@ -75,7 +75,7 @@ const Restaurants = () => {
 
   async function getResList() {
     try {
-      console.log("getResList fn called");
+      
       const list = await fetch(
         "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
       );
@@ -83,7 +83,7 @@ const Restaurants = () => {
       const desktopData =
         json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
-      // console.log(json);
+    
       if (!desktopData) {
         setError({
           type: "fetch",
@@ -105,7 +105,7 @@ const Restaurants = () => {
   const handleSearch = (e) => {
     const searchQuery = e.target.value;
     setSearchText(searchQuery);
-    console.log(searchQuery);
+    
     searchResult(searchQuery);
   };
 
@@ -130,8 +130,8 @@ const Restaurants = () => {
 
   return (
     <>
-      <div className="mx-auto my-6 lg:my-8 overflow-hidden max-w-7xl">
-        <div className="mx-auto flex justify-between items-center py-2 px-2 border-b">
+      <div className="mx-auto my-6 lg:my-8 md:w-4/5 overflow-hidden">
+        <div className="mx-auto w-full flex justify-between items-center py-2 px-2 border-b">
           <div className="flex bg-white rounded-3xl px-4 py-2 space-x-2 border focus-within:border-[#E75E4C]">
             <div className="">
               <input
@@ -183,7 +183,7 @@ const Restaurants = () => {
           
             </div>
           ) : (
-            <div className="max-w-full mx-auto grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-y-12 lg:gap-x-8 md:gap-x-12">
+            <div className="max-w-full grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-y-12 lg:gap-x-8 md:gap-x-12">
               {filteredList.length === 0
                 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
                     <Shimmer key={i} />

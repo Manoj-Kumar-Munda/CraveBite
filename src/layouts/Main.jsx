@@ -8,7 +8,7 @@ import Offline from '../pages/Offline';
 
 const Main = () => {
   const onlineStatus = useOnlineStatus();
-  console.log(onlineStatus)
+ 
   if(!onlineStatus){
     return (
       <>

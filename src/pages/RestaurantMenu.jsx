@@ -7,12 +7,13 @@ import useRestaurantMenu from "../utils/useRestarurantMenu";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
-  console.log("RestaurantMenu");
+
 
   const [ resInfo, resMenu] = useRestaurantMenu(id)
   const [showBrowseMenu, setShowBrowseMenu] = useState(false);
+  // console.log(resMenu);
 
-  console.log(resMenu);
+
 
   useEffect( () => {
     window.scrollTo(top)
@@ -29,7 +30,7 @@ const RestaurantMenu = () => {
   const jumpToMenu = (e) => {
     const body = document.querySelector("body");
     body.classList.toggle("overflow-hidden");
-    console.log(e.target.dataset.category);
+    
     const element = document.querySelector(`#${e.target.dataset.category}`);
     element.scrollIntoView();
     setShowBrowseMenu(false); 
@@ -37,7 +38,7 @@ const RestaurantMenu = () => {
 
   return (
     <div>
-      <div className="relative max-w-4xl mx-auto my-5 px-4 ">
+      <div className="relative lg:w-3/5 md:w-4/5 mx-auto my-5 px-4 ">
         {resMenu.length === 0 ? (
           <h1>Loading....</h1>
         ) : (
@@ -61,7 +62,7 @@ const RestaurantMenu = () => {
                       </span>
                     </div>
                   ))}
-                  {/* <span  className="cursor-pointer">Thalis</span> */}
+                  
                 </div>
               </div>
             ) : null}

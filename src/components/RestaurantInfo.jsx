@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import veg  from "../assets/veg.png";
 
 const RestaurantInfo = ({ info }) => {
-  console.log("Inside resInfo container");
+
   const [isVeg, setIsVeg] = useState(false);
 
   const {

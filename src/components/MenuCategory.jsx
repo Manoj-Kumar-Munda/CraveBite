@@ -4,14 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { useJoin } from "../utils/useJoin";
 
-const MenuCategory = ({ menu }) => {
-  const [isCategoryOpen, setIsCategoryOpen] = useState(true);
+const MenuCategory = ({ menu , isActive,closeCategory, setActiveIndex}) => {
+  // const [isCategoryOpen, setIsCategoryOpen] = useState(true);
   // const [vegItems, setVegItems] = useState([]);
+
+
 
   const { title, itemCards, categories } = menu;
  
-  console.log("Inside MenuCategory");
-  console.log(menu);
+  
 
   // useEffect(() => {
   //   filterVeg();
@@ -31,19 +32,22 @@ const MenuCategory = ({ menu }) => {
   // }
   
   return (
-    <div>
+    <div className="bg-white">
       <div
         id={useJoin(title)}
         className={
-          `flex justify-between my-4 py-2` +
+          `flex justify-between my-4 py-2 bg-red-400` +
           (itemCards && "border-b cursor-pointer")
         }
-        onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+        onClick={ () => {
+          isActive ? closeCategory() :
+          setActiveIndex()
+        }}
       >
         <span className="text-lg font-bold">{(itemCards)?(title+`(${itemCards.length})`):(title) }</span>
         {itemCards && (
           <div>
-            {isCategoryOpen ? (
+            {isActive ? (
               <FontAwesomeIcon icon={faChevronDown} />
             ) : (
               <FontAwesomeIcon icon={faChevronUp} />
@@ -51,14 +55,21 @@ const MenuCategory = ({ menu }) => {
           </div>
         )}
       </div>
-      {isCategoryOpen ? (
+      {isActive ? (
         <div>
           {itemCards ? (
             itemCards.map((item, index) => (
               <ItemCard key={item?.card?.info?.id} item={item?.card?.info} />
             ))
           ) : categories ? (
-            categories.map((item,index) => <MenuCategory menu={item} key={index} />)
+            categories.map((item,index) => 
+            <MenuCategory 
+              key={title}  
+              menu={item} 
+              isActive={isActive} 
+              closeCategory={closeCategory} 
+              setActiveIndex={setActiveIndex}
+            />)
           
           ) : null}
         </div>

@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuCategory from "./MenuCategory";
 
 const Menu = ({ menu }) => {
-  console.log("Inside menu component");
+  const [activeIndex, setActiveIndex] = useState(0);
   
-  
-  
-
   return (
-    <div className="relative">
+    <div className="relative bg-gray-100">
     
       {menu.map((item, index) => {
         return (
-          <MenuCategory key={index} menu={item?.card?.card}/>
+          <MenuCategory 
+            key={index} menu={item?.card?.card} 
+            isActive={activeIndex === index} 
+            closeCategory = {() => setActiveIndex(null)}
+            setActiveIndex={() => setActiveIndex(index)}
+          />
         );
       })}
     </div>
