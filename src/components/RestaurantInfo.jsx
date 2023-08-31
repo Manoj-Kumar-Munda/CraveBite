@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { faClock, faIndianRupeeSign, faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import veg  from "../assets/veg.png";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleVegOnly } from "../utils/itemSlice";
 
 const RestaurantInfo = ({ info }) => {
+  const dispatch = useDispatch();
+  const isVeg = useSelector((store) => store.item.isVegOnly);
 
-  const [isVeg, setIsVeg] = useState(false);
+  const toggleIsVeg = () => {
+    dispatch(toggleVegOnly())
+  }
+
+  
 
   const {
     locality,
@@ -74,7 +81,7 @@ const RestaurantInfo = ({ info }) => {
       ) : (
         <div className="space-x-2 flex items-center">
           <span className="text-xs font-bold text-slate-500">VEG ONLY</span>
-          <button className={`w-10 h-6 rounded-2xl relative flex items-center transition-all ${(isVeg)?(`bg-green-500`):(`bg-slate-200`)} `} onClick={() => setIsVeg(!isVeg)}>
+          <button className={`w-10 h-6 rounded-2xl relative flex items-center transition-all ${(isVeg)?(`bg-green-500`):(`bg-slate-200`)} `} onClick={() => toggleIsVeg()}>
             <span className={`block absolute w-4 h-4 transition-all rounded-full ${(isVeg)?(`left-[calc(100%-20px)] bg-white`):(`left-1 bg-green-500`)}  `}></span>
           </button>
 

@@ -14,11 +14,11 @@ const CartPage = () => {
   console.log(items);
 
   return (
-    <div className="bg-gray-200 py-10 min-h-screen relative">
+    <div className="bg-white min-h-screen relative">
       {
         (items.length === 0 ? 
           (<EmptyCart />) : (
-            <div className="max-w-7xl px-4 mx-auto ">
+            <div className="max-w-7xl px-4 mx-auto my-6">
         <div className="flex justify-between items-center">
           <h1 className="font-bold">Your Cart</h1>
 
@@ -32,7 +32,7 @@ const CartPage = () => {
 
         <div className="my-6">
           <div className="flex flex-wrap-reverse gap-6 ">
-            <div className="flex-grow basis-8/12 bg-white">
+            <div className="flex-grow basis-8/12 border border-slate-300 bg-white">
               <div className="lg:p-6 p-4">
                 <h1 className="font-bold">Enter delivery address</h1>
 
@@ -55,7 +55,7 @@ const CartPage = () => {
               </div>
             </div>
 
-            <div className="flex-grow shrink-0 basis-3/12 bg-white self-end">
+            <div className="border border-slate-300 flex-grow shrink-0 basis-3/12 bg-white self-end">
               <table className="mb-4 w-full table-auto">
                 <thead>
                   <tr>
@@ -78,6 +78,13 @@ const CartPage = () => {
                     <td> </td>
                     <td>
                       <span className="text-sm font-bold">₹ {totalAmount / 100}</span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td colSpan={3} className="text-center px-3 pt-3">
+                      <button className="bg-orange-500 w-full py-2"><a className="text-sm font-bold text-white text-center">PROCEED TO CHECKOUT</a></button>
+
                     </td>
                   </tr>
                 </tbody>

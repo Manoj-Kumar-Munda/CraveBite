@@ -3,6 +3,7 @@ import MenuCategory from "./MenuCategory";
 
 const Menu = ({ menu }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  console.log(menu);
   
   return (
     <div className="relative bg-gray-100">

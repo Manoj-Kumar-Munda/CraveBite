@@ -13,7 +13,7 @@ const RestaurantMenu = () => {
 
   const [resInfo, resMenu] = useRestaurantMenu(id);
   const [showBrowseMenu, setShowBrowseMenu] = useState(false);
-  // console.log(resMenu);
+  
 
   useEffect(() => {
     window.scrollTo(top);

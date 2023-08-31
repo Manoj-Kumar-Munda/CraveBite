@@ -2,7 +2,7 @@ import React from 'react'
 import Background from "../assets/take-away-animate.svg";
 
 const Hero = () => {
-  console.log("Inside Hero component");
+ 
   const goToRestaurants = () => {
     const element = document.getElementById('restaurants');
     element.scrollIntoView();

@@ -5,43 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Shimmer from "./Shimmer";
 import NotFound from "../assets/notFound.png";
+import { sortByCost, sortByDeliveryTime, sortByRating } from "../utils/helperFunctions";
 
 const Restaurants = () => {
-  
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [error, setError] = useState(null);
   const [sortBy, setSortBy] = useState("");
-
-  const sortByDeliveryTime = () => {
-    
-    const data = [...restaurantList];
-    const result = data.sort(
-      (item1, item2) =>
-        item1?.info?.sla?.deliveryTime - item2?.info?.sla?.deliveryTime
-    );
-    setFilteredList(result);
-  };
-
-  const sortByRating = () => {
-    const data = [...restaurantList];
-    const result = data.sort(
-      (item1, item2) => item1?.info?.avgRating - item2?.info?.avgRating
-    );
-    setFilteredList(result);
-  };
-
-  const sortByCost = () => {
-    const data = [...restaurantList];
-    const result = data.sort(
-      (item1, item2) =>
-        parseInt(item1?.info?.costForTwo.match(/\d+/)[0], 10) -
-        parseInt(item2?.info?.costForTwo.match(/\d+/)[0], 10)
-    );
-   
-    setFilteredList(result);
-  };
 
   const sortByRelevance = () => {
     setFilteredList(restaurantList);
@@ -54,19 +25,15 @@ const Restaurants = () => {
   useEffect(() => sortRes(), [sortBy]);
 
   const sortRes = () => {
-    
     switch (sortBy) {
       case "deliveryTime":
-        
-        sortByDeliveryTime();
+        setFilteredList(sortByDeliveryTime(restaurantList));
         break;
       case "rating":
-        
-        sortByRating();
+        setFilteredList(sortByRating(restaurantList));
         break;
       case "costForTwo":
-        
-        sortByCost();
+        setFilteredList(sortByCost(restaurantList));
         break;
       default:
         sortByRelevance();
@@ -75,37 +42,25 @@ const Restaurants = () => {
 
   async function getResList() {
     try {
-      
       const list = await fetch(
         "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
       );
       const json = await list.json();
-      const desktopData =
-        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-    
-      if (!desktopData) {
-        setError({
-          type: "fetch",
-          message: "Failed to fetch restaurant data",
-        });
-      } else {
-        setError(null);
-      }
+      console.log(json);
+      
+      const desktopData = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      console.log(desktopData);
       setRestaurantList(desktopData);
       setFilteredList(desktopData);
     } catch (e) {
-      setError({
-        type: "fetch",
-        message: "Failed to fetch restaurant data",
-      });
+      console.log("There was an error");
     }
   }
 
   const handleSearch = (e) => {
     const searchQuery = e.target.value;
     setSearchText(searchQuery);
-    
+
     searchResult(searchQuery);
   };
 
@@ -126,8 +81,6 @@ const Restaurants = () => {
     }
   }
 
- 
-
   return (
     <>
       <div className="mx-auto my-6 lg:my-8 md:w-4/5 overflow-hidden">
@@ -138,9 +91,7 @@ const Restaurants = () => {
                 className=" bg-white text-slate-600  caret-[#E75E4C] border-none outline-none placeholder:text-text-slate-600 placeholder:text-sm"
                 placeholder="Search restaurant"
                 value={searchText}
-                onChange={
-                  (e) => handleSearch(e)
-                }
+                onChange={(e) => handleSearch(e)}
               />
             </div>
             <div>
@@ -179,12 +130,10 @@ const Restaurants = () => {
             <div className="flex flex-col justify-center bg-red space-y-4">
               <img src={NotFound} className="w-56" />
               <p className="text-center">{error.message}</p>
-              <button className="ring-2 ring-blue-500" onClick={() => location.reload()}>Refresh</button>
-          
             </div>
           ) : (
             <div className="max-w-full grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-y-12 lg:gap-x-8 md:gap-x-12">
-              {filteredList.length === 0
+              { !filteredList || filteredList.length === 0
                 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
                     <Shimmer key={i} />
                   ))
