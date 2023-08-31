@@ -102,7 +102,7 @@ const RestaurantMenu = () => {
                 </div>
               </div>
             ) : null}
-            <div className="fixed bottom-4 left-0 right-0 text-center">
+            <div className="fixed bottom-4 left-1/2 -translate-x-1/2">
               <button
                 className="bg-blue-500 text-white font-bold text-sm px-6 py-3 rounded-3xl transition-colors hover:bg-blue-600"
                 onClick={() => handleBrowseMenu()}
