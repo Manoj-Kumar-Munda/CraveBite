@@ -83,7 +83,7 @@ const Restaurants = () => {
 
   return (
     <>
-      <div className="mx-auto my-6 lg:my-8 md:w-4/5 overflow-hidden">
+      <div className="mx-auto my-6 lg:my-10 md:w-4/5 overflow-hidden">
         <div className="mx-auto w-full flex justify-between items-center py-2 px-2 border-b">
           <div className="flex bg-white rounded-3xl px-4 py-2 space-x-2 border focus-within:border-[#E75E4C]">
             <div className="">
