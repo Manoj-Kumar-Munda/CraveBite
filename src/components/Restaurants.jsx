@@ -1,11 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { RESTAURANT_LIST_DESKTOP } from "../utils/constants";
+import {
+  RESTAURANT_LIST_DESKTOP,
+  RESTAURANT_LIST_MOBILE,
+} from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faSort } from "@fortawesome/free-solid-svg-icons";
 import Shimmer from "./Shimmer";
 import NotFound from "../assets/notFound.png";
 import {
+
+  isMobile,
   sortByCost,
   sortByDeliveryTime,
   sortByRating,
@@ -58,23 +63,31 @@ const Restaurants = () => {
   async function getResList() {
     try {
       const list = await fetch(
-        "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
+        isMobile()
+          ? "https://corsproxy.io/?" + RESTAURANT_LIST_MOBILE
+          : "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
       );
       const json = await list.json();
       console.log(json);
 
       let resList;
-      const list0 =
-        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-      const list1 =
-        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-      const list2 =
-        json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
 
-      resList = list0 || list1 || list2;
+      if (isMobile()) {
+        resList = json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle?.restaurants;
+      } else {
+        const list0 =
+          json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants;
+        const list1 =
+          json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants;
+        const list2 =
+          json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants;
+
+        resList = list0 || list1 || list2;
+      }
+
       console.log(resList);
       setRestaurantList(resList);
       setFilteredList(resList);
@@ -143,7 +156,7 @@ const Restaurants = () => {
             </button>
 
             {showSort ? (
-              <SortRadio  sortBy = {sortBy} handleOnChange = {handleOnChange}/>
+              <SortRadio sortBy={sortBy} handleOnChange={handleOnChange} />
             ) : null}
           </div>
         </div>

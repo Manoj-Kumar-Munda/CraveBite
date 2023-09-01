@@ -1,5 +1,9 @@
 
 
+export const isMobile = () => {
+  return window.innerWidth <= 768;
+}
+
 export const sortByDeliveryTime = (restaurantList) => {
     const data = [...restaurantList];
     const result = data.sort(

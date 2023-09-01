@@ -17,10 +17,12 @@ const useRestaurantMenu = (resId) => {
           );
           const json = await data.json();
           const resInfo = json?.data?.cards[0]?.card?.card?.info;
-          const resMenu =
+          const resDesktopMenu =
             json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.slice(1,-2);
+
+          const resMobileMenu = json?.data?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards.slice(1,-2);
           setResInfo(resInfo);
-          setResMenu(resMenu);
+          setResMenu(resDesktopMenu || resMobileMenu);
     }
 
     return [resInfo, resMenu];

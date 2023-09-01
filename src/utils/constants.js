@@ -5,4 +5,4 @@ export const MENU_API = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_M
 // ${resId}
 // &catalog_qa=undefined&submitAction=ENTER`;
 
-const RESTAURANT_LIST_MOBILE = "https://www.swiggy.com/mapi/homepage/getCards?lat=23.3440997&lng=85.309562";
+export const RESTAURANT_LIST_MOBILE = "https://www.swiggy.com/mapi/homepage/getCards?lat=23.369726076519406&lng=85.33414583862306";
