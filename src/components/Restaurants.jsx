@@ -2,17 +2,27 @@ import React, { useEffect, useMemo, useState } from "react";
 import { RESTAURANT_LIST_DESKTOP } from "../utils/constants";
 import RestaurantCard from "./RestaurantCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faSort } from "@fortawesome/free-solid-svg-icons";
 import Shimmer from "./Shimmer";
 import NotFound from "../assets/notFound.png";
-import { sortByCost, sortByDeliveryTime, sortByRating } from "../utils/helperFunctions";
+import {
+  sortByCost,
+  sortByDeliveryTime,
+  sortByRating,
+} from "../utils/helperFunctions";
+import SortRadio from "./SortRadio";
 
 const Restaurants = () => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [error, setError] = useState(null);
-  const [sortBy, setSortBy] = useState("");
+  const [sortBy, setSortBy] = useState("relevance");
+  const [showSort, setShowSort] = useState(false);
+
+  const toggleShowSort = () => {
+    setShowSort(!showSort);
+  };
 
   const sortByRelevance = () => {
     setFilteredList(restaurantList);
@@ -23,6 +33,11 @@ const Restaurants = () => {
   }, []);
 
   useEffect(() => sortRes(), [sortBy]);
+
+  const handleOnChange = (e) => {
+    setSortBy(e.target.value);
+    setShowSort(false);
+  };
 
   const sortRes = () => {
     switch (sortBy) {
@@ -49,15 +64,17 @@ const Restaurants = () => {
       console.log(json);
 
       let resList;
-      
-      const list1 = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-      const list2 = json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      const list0 =
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
+      const list1 =
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
+      const list2 =
+        json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
 
-      if(list1){
-        resList = list1;
-      } else{
-        resList = list2;
-      }
+      resList = list0 || list1 || list2;
       console.log(resList);
       setRestaurantList(resList);
       setFilteredList(resList);
@@ -94,7 +111,7 @@ const Restaurants = () => {
     <>
       <div className="mx-auto my-6 lg:my-10 md:w-4/5 overflow-hidden">
         <div className="mx-auto w-full flex justify-between items-center py-2 px-2 border-b">
-          <div className="flex bg-white rounded-3xl px-4 py-2 space-x-2 border focus-within:border-[#E75E4C]">
+          <div className="flex bg-white rounded-3xl px-4 py-2 gap-2 border focus-within:border-[#E75E4C]">
             <div className="">
               <input
                 className=" bg-white text-slate-600  caret-[#E75E4C] border-none outline-none placeholder:text-text-slate-600 placeholder:text-sm"
@@ -116,21 +133,18 @@ const Restaurants = () => {
             </div>
           </div>
 
-          <div>
-            <ul className="flex space-x-10">
-              <li className="">
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="px-2 py-2 rounded-lg border-2 border-red-400 focus:outline-none focus:border-red-200"
-                >
-                  <option value="relevance">Relevance</option>
-                  <option value="deliveryTime">Delivery Time</option>
-                  <option value="rating">Rating</option>
-                  <option value="costForTwo">Cost For Two</option>
-                </select>
-              </li>
-            </ul>
+          <div className="relative">
+            <button
+              className="flex gap-2 items-center focus:border p-2"
+              onClick={() => toggleShowSort()}
+            >
+              <span className="text-sm font-bold text-orange-500">SORT</span>
+              <FontAwesomeIcon icon={faSort} />
+            </button>
+
+            {showSort ? (
+              <SortRadio  sortBy = {sortBy} handleOnChange = {handleOnChange}/>
+            ) : null}
           </div>
         </div>
 
@@ -142,7 +156,7 @@ const Restaurants = () => {
             </div>
           ) : (
             <div className="max-w-full grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-y-12 lg:gap-x-8 md:gap-x-12">
-              { !filteredList || filteredList.length === 0
+              {!filteredList || filteredList.length === 0
                 ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
                     <Shimmer key={i} />
                   ))
