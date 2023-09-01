@@ -18,7 +18,7 @@ const Main = () => {
     )
   }
   return (
-    <div className=''>
+    <div className='main-layout'>
         <Header />
         <main className=''>
             <Outlet />

@@ -47,11 +47,20 @@ const Restaurants = () => {
       );
       const json = await list.json();
       console.log(json);
+
+      let resList;
       
-      const desktopData = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-      console.log(desktopData);
-      setRestaurantList(desktopData);
-      setFilteredList(desktopData);
+      const list1 = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      const list2 = json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
+      if(list1){
+        resList = list1;
+      } else{
+        resList = list2;
+      }
+      console.log(resList);
+      setRestaurantList(resList);
+      setFilteredList(resList);
     } catch (e) {
       console.log("There was an error");
     }

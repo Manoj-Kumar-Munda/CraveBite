@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const totalItems = useSelector((store) => store.cart.totalItems);
   return (
-    <div className="fixed px-3 lg:px-8 h-16 top-0 left-0 right-0 flex justify-between items-center bg-stone-800 z-50">
+    <div className="fixed px-3 lg:px-8 h-16 top-0 left-0 right-0 flex justify-between items-center bg-black z-50">
       <div className="h-full py-3 lg:py-2 ">
         <Link to={"/"}>
           <img className="w-full h-full" src={logo} />

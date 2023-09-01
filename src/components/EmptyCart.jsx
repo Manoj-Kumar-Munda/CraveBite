@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const EmptyCart = () => {
   return (
     <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-        <div className='bg-white max-w-sm w-96 space-y-3 text-center'>
+        <div className='max-w-sm w-96 space-y-3 text-center'>
             <img 
               src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0"} 
               alt="empty-cart" 

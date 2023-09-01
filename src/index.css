@@ -28,10 +28,14 @@ html::-webkit-scrollbar-thumb{
 body{
   padding-top: 4rem;
 }
-.container{
+
+
+.main-layout{
     
+    min-height: calc(100vh - 4rem);
+    /* background-color: aquamarine; */
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    
 }
 
 .skeleton::after {

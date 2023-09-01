@@ -11,10 +11,10 @@ const CartPage = () => {
   const dispatch = useDispatch()
   const items = useSelector((store) => store.cart.items);
   const totalAmount = useSelector((store) => store.cart.total);
-  console.log(items);
+
 
   return (
-    <div className="bg-white min-h-screen relative">
+    <div className="relative h-full">
       {
         (items.length === 0 ? 
           (<EmptyCart />) : (
