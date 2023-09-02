@@ -9,7 +9,6 @@ import { faMagnifyingGlass, faSort } from "@fortawesome/free-solid-svg-icons";
 import Shimmer from "./Shimmer";
 import NotFound from "../assets/notFound.png";
 import {
-
   isMobile,
   sortByCost,
   sortByDeliveryTime,
@@ -68,12 +67,13 @@ const Restaurants = () => {
           : "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
       );
       const json = await list.json();
-      console.log(json);
 
       let resList;
 
       if (isMobile()) {
-        resList = json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle?.restaurants;
+        resList =
+          json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
+            ?.restaurants;
       } else {
         const list0 =
           json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
@@ -87,8 +87,6 @@ const Restaurants = () => {
 
         resList = list0 || list1 || list2;
       }
-
-      console.log(resList);
       setRestaurantList(resList);
       setFilteredList(resList);
     } catch (e) {
