@@ -23,7 +23,7 @@ const MenuCategory = ({ menu, isActive, closeCategory, setActiveIndex }) => {
           isActive ? closeCategory() : setActiveIndex();
         }}
       >
-        <span className="text-lg font-bold">
+        <span className="text-lg font-bold cursor-pointer">
           {itemCards ? title + `(${itemCards.length})` : title}
         </span>
         {itemCards && (

@@ -32,7 +32,7 @@ const Hero = () => {
             </div>
 
             <div className='hidden lg:block'>
-              <img src={Background} className="w-full h-full" />
+              <img src={Background} className="w-full h-full" loading='lazy'/>
             </div>
           </div>
         </div>

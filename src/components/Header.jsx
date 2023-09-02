@@ -14,48 +14,9 @@ const Header = () => {
     <div className="fixed px-3 lg:px-8 h-16 top-0 left-0 right-0 flex justify-between items-center bg-black z-50">
       <div className="h-full py-3 lg:py-2 ">
         <Link to={"/"}>
-          <img className="w-full h-full" src={logo} />
+          <img className="w-full h-full" src={logo} loading="lazy" />
         </Link>
       </div>
-
-      {/* <div className="hidden lg:block">
-        <ul className=" flex items-center space-x-8">
-          <li>
-            <Link
-              to={"/"}
-              href="#"
-              className="text-white font-semibold hover:text-[#EDE574] transition-colors"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/blog"}
-              href="#"
-              className="text-white font-semibold hover:text-[#EDE574] transition-colors"
-            >
-              Blog
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/about"}
-              className="text-white font-semibold hover:text-[#EDE574] transition-colors"
-            >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link
-              to={"/contact"}
-              className="text-white font-semibold hover:text-[#EDE574] transition-colors"
-            >
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </div> */}
 
       <div>
         <button className="flex items-center space-x-3">
