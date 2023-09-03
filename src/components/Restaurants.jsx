@@ -62,32 +62,31 @@ const Restaurants = () => {
   async function getResList() {
     try {
       const list = await fetch(
-        "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
+        isMobile()
+          ? "https://corsproxy.io/?" + RESTAURANT_LIST_MOBILE
+          : "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
       );
       const json = await list.json();
-      console.log(json);
 
       let resList;
 
-      // if (isMobile()) {
-      //   resList =
-      //     json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-      //       ?.restaurants;
-      // } else {
-      const list0 =
-        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-      const list1 =
-        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-      const list2 =
-        json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
+      if (isMobile()) {
+        resList =
+          json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
+            ?.restaurants;
+      } else {
+        const list0 =
+          json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants;
+        const list1 =
+          json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants;
+        const list2 =
+          json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants;
 
-      resList = list0 || list1 || list2;
-
-      console.log(resList);
-      // }
+        resList = list0 || list1 || list2;
+      }
       setRestaurantList(resList);
       setFilteredList(resList);
     } catch (e) {
