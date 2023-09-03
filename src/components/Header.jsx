@@ -19,7 +19,7 @@ const Header = () => {
       </div>
 
       <div>
-        <button className="flex items-center space-x-3">
+        <button className="flex items-center space-x-3 pr-2 md:pr-0">
           <Link to={"cart"}>
             <div className="relative">
               <FontAwesomeIcon
@@ -33,7 +33,7 @@ const Header = () => {
             </div>
           </Link>
 
-          <span className="font-semibold text-white">Cart</span>
+          <span className="hidden md:inline-block font-semibold text-white">Cart</span>
         </button>
       </div>
     </div>
