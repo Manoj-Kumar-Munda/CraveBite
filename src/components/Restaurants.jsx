@@ -62,31 +62,32 @@ const Restaurants = () => {
   async function getResList() {
     try {
       const list = await fetch(
-        isMobile()
-          ? "https://corsproxy.io/?" + RESTAURANT_LIST_MOBILE
-          : "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
+        "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
       );
       const json = await list.json();
+      console.log(json);
 
       let resList;
 
-      if (isMobile()) {
-        resList =
-          json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-            ?.restaurants;
-      } else {
-        const list0 =
-          json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants;
-        const list1 =
-          json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants;
-        const list2 =
-          json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
-            ?.restaurants;
+      // if (isMobile()) {
+      //   resList =
+      //     json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
+      //       ?.restaurants;
+      // } else {
+      const list0 =
+        json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
+      const list1 =
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
+      const list2 =
+        json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
 
-        resList = list0 || list1 || list2;
-      }
+      resList = list0 || list1 || list2;
+
+      console.log(resList);
+      // }
       setRestaurantList(resList);
       setFilteredList(resList);
     } catch (e) {
@@ -166,14 +167,16 @@ const Restaurants = () => {
               <p className="text-center">{error.message}</p>
             </div>
           ) : (
-            <div className="max-w-full grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-y-12 lg:gap-x-8 md:gap-x-12">
-              {!filteredList || filteredList.length === 0
-                ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                    <Shimmer key={i} />
-                  ))
-                : filteredList.map((item) => (
-                    <RestaurantCard key={item?.info?.id} data={item?.info} />
-                  ))}
+            <div className="basis-full">
+              <div className="grid justify-items-center grid-cols-[repeat(auto-fill,minmax(280px,1fr))]  gap-y-12 lg:gap-x-8 md:gap-x-12">
+                {!filteredList || filteredList.length === 0
+                  ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+                      <Shimmer key={i} />
+                    ))
+                  : filteredList.map((item) => (
+                      <RestaurantCard key={item?.info?.id} data={item?.info} />
+                    ))}
+              </div>
             </div>
           )}
         </div>
