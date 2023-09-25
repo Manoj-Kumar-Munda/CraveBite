@@ -30,11 +30,7 @@ CraveBite is a food delivery app that offers convenient food delivery services t
 
 - Provides a search functionality that allows users to find restaurants by name or cuisine.
 
-### 4. Filter Menu
-
-- Allows users to filter restaurant menus based on various criteria such as cuisine type, price range, and more.
-
-### 5. Sort Restaurants
+### 4. Sort Restaurants
 
 - Enables users to sort available restaurants based on:
   - Relevance
