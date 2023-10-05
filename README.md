@@ -1,18 +1,15 @@
 # CraveBite - Food Delivery App
 
 CraveBite is a food delivery app that offers convenient food delivery services throughout Ranchi. With CraveBite, users can order a wide variety of delicious dishes from nearby restaurants. This project is built using modern web technologies and provides several key features to enhance the food ordering experience.
+![Screenshot (8)](https://github.com/Manoj-Kumar-Munda/CraveBite/assets/131114467/94f8e53b-f8f5-448f-a3b2-312019bda1ac)
 
-![CraveBite Demo](https://cravebite.netlify.app/)
+
 
 ## Table of Contents
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+
 
 ## Features
 
