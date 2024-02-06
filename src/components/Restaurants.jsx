@@ -67,7 +67,6 @@ const Restaurants = () => {
           : RESTAURANT_LIST_DESKTOP
       );
       const json = await list.json();
-      console.log(json);
 
       let resList;
 
