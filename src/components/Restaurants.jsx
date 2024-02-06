@@ -63,10 +63,11 @@ const Restaurants = () => {
     try {
       const list = await fetch(
         isMobile()
-          ? "https://corsproxy.io/?" + RESTAURANT_LIST_MOBILE
-          : "https://corsproxy.io/?" + RESTAURANT_LIST_DESKTOP
+          ? RESTAURANT_LIST_MOBILE
+          : RESTAURANT_LIST_DESKTOP
       );
       const json = await list.json();
+      console.log(json);
 
       let resList;
 
@@ -169,7 +170,7 @@ const Restaurants = () => {
             <div className="basis-full">
               <div className="grid justify-items-center grid-cols-[repeat(auto-fill,minmax(280px,1fr))]  gap-y-12 lg:gap-x-8 md:gap-x-12">
                 {!filteredList || filteredList.length === 0
-                  ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+                  ? [1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
                       <Shimmer key={i} />
                     ))
                   : filteredList.map((item) => (
