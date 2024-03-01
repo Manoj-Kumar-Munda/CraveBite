@@ -61,6 +61,7 @@ const Restaurants = () => {
 
   async function getResList() {
     try {
+      console.log("fetching RestaurantData")
       const list = await fetch(
         isMobile()
           ? RESTAURANT_LIST_MOBILE
