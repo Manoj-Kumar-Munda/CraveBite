@@ -2,7 +2,8 @@ export const RESTAURANT_LIST_DESKTOP = "https://www.swiggy.com/dapi/restaurants/
 
 export const RESTAURANT_IMG_CDN = 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/';
 export const MENU_API = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=23.369726076519406&lng=85.33414583862306&restaurantId=`;
-// ${resId}
-// &catalog_qa=undefined&submitAction=ENTER`;
+
+export const CORSPROXY = "https://corsproxy.org/?";
+
 
 export const RESTAURANT_LIST_MOBILE = "https://www.swiggy.com/mapi/homepage/getCards?lat=23.369726076519406&lng=85.33414583862306";
