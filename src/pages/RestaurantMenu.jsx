@@ -76,7 +76,7 @@ const RestaurantMenu = () => {
           <h1>Loading....</h1>
         ) : (
           <>
-            <RestaurantInfo info={resInfo} />
+            <RestaurantInfo id={id} />
             <Menu menu={resMenu} />
             {showBrowseMenu ? (
               <div

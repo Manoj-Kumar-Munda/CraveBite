@@ -1,19 +1,27 @@
 import React from "react";
-import { faClock, faIndianRupeeSign, faLeaf } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClock,
+  faIndianRupeeSign,
+  faLeaf,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleVegOnly } from "../utils/itemSlice";
 
-const RestaurantInfo = ({ info }) => {
-  console.log("info", info);
+const RestaurantInfo = ({ id }) => {
+  console.log("id", id);
+
+  const { restaurants } = useSelector( store => store.restaurants)
+  console.log("restaurants: ", restaurants);
+
+  const resInfo = restaurants.filter((item) => item.info.id === id)[0]
+  console.log("resList :", resInfo)
   const dispatch = useDispatch();
   const isVeg = useSelector((store) => store.item.isVegOnly);
 
   const toggleIsVeg = () => {
-    dispatch(toggleVegOnly())
-  }
-
-  
+    dispatch(toggleVegOnly());
+  };
 
   const {
     locality,
@@ -25,9 +33,10 @@ const RestaurantInfo = ({ info }) => {
     cuisines,
     veg,
     sla: { deliveryTime },
-  } = info;
+  } = resInfo.info;
 
   return (
+    
     <div className="space-y-5">
       <div className="flex justify-between">
         <div className="flex flex-col space-y-2">
@@ -74,19 +83,28 @@ const RestaurantInfo = ({ info }) => {
         </div>
       </div>
 
-      { (veg) ? (
+      {veg ? (
         <div className="space-x-2">
-          <FontAwesomeIcon icon={faLeaf} style={{color: "#33c14b",}} />
+          <FontAwesomeIcon icon={faLeaf} style={{ color: "#33c14b" }} />
           <span className="text-xs font-bold text-slate-500">PURE VEG</span>
         </div>
       ) : (
         <div className="space-x-2 flex items-center">
           <span className="text-xs font-bold text-slate-500">VEG ONLY</span>
-          <button className={`w-10 h-6 rounded-2xl relative flex items-center transition-all ${(isVeg)?(`bg-green-500`):(`bg-slate-200`)} `} onClick={() => toggleIsVeg()}>
-            <span className={`block absolute w-4 h-4 transition-all rounded-full ${(isVeg)?(`left-[calc(100%-20px)] bg-white`):(`left-1 bg-green-500`)}  `}></span>
+          <button
+            className={`w-10 h-6 rounded-2xl relative flex items-center transition-all ${
+              isVeg ? `bg-green-500` : `bg-slate-200`
+            } `}
+            onClick={() => toggleIsVeg()}
+          >
+            <span
+              className={`block absolute w-4 h-4 transition-all rounded-full ${
+                isVeg
+                  ? `left-[calc(100%-20px)] bg-white`
+                  : `left-1 bg-green-500`
+              }  `}
+            ></span>
           </button>
-
-
         </div>
       )}
     </div>
