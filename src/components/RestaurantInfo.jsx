@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleVegOnly } from "../utils/itemSlice";
 
 const RestaurantInfo = ({ info }) => {
+  console.log("info", info);
   const dispatch = useDispatch();
   const isVeg = useSelector((store) => store.item.isVegOnly);
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  CORSPROXY,
   RESTAURANT_LIST_DESKTOP,
   RESTAURANT_LIST_MOBILE,
 } from "../utils/constants";
@@ -62,11 +61,10 @@ const Restaurants = () => {
 
   async function getResList() {
     try {
-      console.log("fetching RestaurantData")
       const list = await fetch(
         isMobile()
-          ? CORSPROXY + encodeURIComponent(RESTAURANT_LIST_MOBILE)
-          : CORSPROXY + encodeURIComponent(RESTAURANT_LIST_DESKTOP)
+          ? RESTAURANT_LIST_MOBILE
+          : RESTAURANT_LIST_DESKTOP
       );
       const json = await list.json();
 
@@ -89,6 +87,8 @@ const Restaurants = () => {
 
         resList = list0 || list1 || list2;
       }
+
+      console.log("Restaurant list: ", resList);
       setRestaurantList(resList);
       setFilteredList(resList);
     } catch (e) {
