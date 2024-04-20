@@ -13,9 +13,12 @@ const useRestaurants = () => {
     try {
       const res = await fetch(RESTAURANT_LIST_DESKTOP);
       const json = await res.json();
+      console.log(json);
       const resList =
         json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
+
+        
 
       setRestaurantList(resList);
       dispatch(addRestaurants(resList));
