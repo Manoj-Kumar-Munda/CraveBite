@@ -19,11 +19,13 @@ import useRestaurants from "../utils/useRestaurants";
 
 const Restaurants = () => {
 
-  const {error, isLoading, restaurantList} = useRestaurants();
+  const { error, isLoading, restaurantList} = useRestaurants();
   const [filteredList, setFilteredList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [sortBy, setSortBy] = useState("relevance");
   const [showSort, setShowSort] = useState(false);
+  const [errors, setError] = useState(null);
+
 
   
   if(restaurantList.length > 0 && filteredList.length === 0){
@@ -62,39 +64,6 @@ const Restaurants = () => {
     }
   };
 
-  // async function getResList() {
-  //   try {
-  //     const list = await fetch(
-  //       isMobile()
-  //         ? RESTAURANT_LIST_MOBILE
-  //         : RESTAURANT_LIST_DESKTOP
-  //     );
-  //     const json = await list.json();
-
-  //     let resList;
-
-  //     if (isMobile()) {
-  //       resList =
-  //         json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle
-  //           ?.restaurants;
-  //     } else {
-  //       const list0 =
-  //         json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-  //           ?.restaurants;
-  //       const list1 =
-  //         json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-  //           ?.restaurants;
-  //       const list2 =
-  //         json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
-  //           ?.restaurants;
-
-  //       resList = list0 || list1 || list2;
-  //     }
-  //     setFilteredList(resList);
-  //   } catch (e) {
-  //     console.log("There was an error");
-  //   }
-  // }
 
   const handleSearch = (e) => {
     const searchQuery = e.target.value;
@@ -104,6 +73,8 @@ const Restaurants = () => {
   };
 
   function searchResult(query) {
+    console.log(query);
+
     try {
       const res = restaurantList.filter((item) =>
         item?.info?.name.toLowerCase().includes(query.toLowerCase())
@@ -163,10 +134,10 @@ const Restaurants = () => {
 
         <div id="restaurants" className="flex justify-center w-full mt-4">
           
-          {error ? (
+          {errors || error ? (
             <div className="flex flex-col justify-center bg-red space-y-4">
               <img src={NotFound} className="w-56" />
-              <p className="text-center">{error.message}</p>
+              <p className="text-center">{errors.message}</p>
             </div>
           ) : (
             <div className="basis-full">
