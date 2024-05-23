@@ -1,5 +1,8 @@
 # CraveBite - Food Delivery App
 
+
+#NOTE: If you face CORS error while using this application install this chrome [extension](https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf)
+
 CraveBite is a food delivery app that offers convenient food delivery services throughout Ranchi. With CraveBite, users can order a wide variety of delicious dishes from nearby restaurants. This project is built using modern web technologies and provides several key features to enhance the food ordering experience.
 ![Screenshot (8)](https://github.com/Manoj-Kumar-Munda/CraveBite/assets/131114467/94f8e53b-f8f5-448f-a3b2-312019bda1ac)
 
